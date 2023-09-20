@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Dodaj nowy pokój</h1>
+
+    <form method="POST" class="formsik">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-inline">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+          </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+    </form>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">{{room.name}}</div>
+
+    <form action="" method="POST" class="formsik">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-inline">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+          </div>
+        {% endfor %}
+        <input type="submit" value="Rezerwuj" class="btn btn-secondary">
+    </form>
+
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Zaloguj się</h2>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Nazwa użytkownika" required>
+        <input type="password" name="password" placeholder="Hasło" required>
+        <button type="submit">Zaloguj się</button>
+    </form>
+    <p>Nie masz jeszcze konta? <a href="{% url 'register' %}">Zarejestruj się</a></p>
+{% endblock %}

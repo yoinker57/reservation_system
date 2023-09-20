@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Lista wyposażenia</h1>
+    
+    {% for equipment in equipment_list %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h4 class="card-title">{{equipment.room.name}}</h4>
+        <p class="card-text">{{equipment.room.description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Max ilość osób: {{equipment.capacity}}</li>
+        <li class="list-group-item">Projektor: {% if equipment.projector %}Dostępne{% else %}Niedostępne{% endif %}</li>
+        <li class="list-group-item">WiFi: {% if equipment.WiFi %}Dostępne{% else %}Niedostępne{% endif %}</li>
+        <li class="list-group-item">Komputery: {% if equipment.computers %}Dostępne{% else %}Niedostępne{% endif %}</li>
+        <li class="list-group-item">Start date: {{equipment.start_date}}</li>
+        <li class="list-group-item">End date: {{equipment.end_date}}</li>
+        </ul>
+        <div class="card-body">  
+            <a href="{% url 'deleteEquipment' equipment.id %}" class="btn btn-danger">Usuń wyposażenie</a>
+        </div>
+    </div>    
+    {% endfor %}
+    <a href="{% url 'editRoom' roomId %}" class="btn btn-secondary">Edytuj wyposażenie pokoju</a>
+{% endblock %}

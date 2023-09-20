@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="cardR" style="width: 18rem;">
+  <div class="card-body">
+  <h5 class="card-title">{{reservation.room}}</h5>
+  <h3 class="card-text">User: {{reservation.user}}</h3>
+  </div>
+<form method="POST" class="formsik">
+  {% csrf_token %}
+  {% for field in form %}
+  <div class="form-inline">
+    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ field }}
+  </div>
+  {% endfor %}
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<form method="POST" action="">
+  {% csrf_token %}
+  <input type="submit" class="btn btn-danger" name="delete_button" value="Usuń">
+</form>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-danger" role="alert">
+  {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

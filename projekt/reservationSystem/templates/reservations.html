@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for reservation in reservations_list %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">{{reservation.room}}</h5>
+        <p class="card-text">{{reservation.comment}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item">User: {{reservation.user}}</li>
+        <li class="list-group-item">Date: {{reservation.date}}</li>
+        <li class="list-group-item">Start time: {{reservation.start_time}}</li>
+        <li class="list-group-item">End time: {{reservation.end_time}}</li>
+        <li class="list-group-item">Email address: {{reservation.email_adress}}</li>
+        </ul>
+        <div class="card-body">
+            <a href="{% url 'reservation' reservation.id %}" class="btn btn-primary">Edytuj rezerwację</a>
+            <form method="POST" action="" class="formDel">
+                {% csrf_token %}
+                <input type="hidden" name="reservation_id" value="{{ reservation.id }}">
+                <input type="submit" class="btn btn-danger" name="delete_button" value="Usuń rezerwację">
+              </form>
+        </div>
+        
+    </div>
+
+    {% endfor %}
+{% endblock %}

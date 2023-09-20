@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="{% url 'addRoom' %}" class="btn btn-primary">Dodaj nowy pokój</a>
+    <h1>Lista pokoi</h1>
+    
+    {% for room in room_list %}
+    <div class="card" style="width: 18rem;">
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+        <div class="card-body">
+        <h3 class="card-title">{{room.name}}</h4>
+        <h6 class="card-title">ID: {{room.id}}</h6>
+        <p class="card-text">Description: {{room.description}}</p>
+        </div>
+        <!-- <ul class="list-group list-group-flush">
+            <li class="list-group-item">Max ilość osób: {{room.capacity}}</li>
+        <li class="list-group-item">Projektor: {% if room.projector %}Dostępne{% else %}Niedostępne{% endif %}</li>
+        <li class="list-group-item">WiFi: {% if room.WiFi %}Dostępne{% else %}Niedostępne{% endif %}</li>
+        <li class="list-group-item">Komputery: {% if room.computers %}Dostępne{% else %}Niedostępne{% endif %}</li>
+        <li class="list-group-item">Start date: {{room.start_date}}</li>
+        <li class="list-group-item">End date: {{room.end_date}}</li>
+        </ul> -->
+        <div class="card-body">
+        <a href="{% url 'roomDetails' room.id %}" class="btn btn-primary">Szczegóły</a>   
+        <a href="{% url 'deleteRoom' room.id %}" class="btn btn-danger">Usuń pokój</a>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

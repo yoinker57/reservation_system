@@ -1,0 +1,24 @@
+.formsik{
+    margin: 10px;
+    padding: 7px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-inline{
+    margin-right: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.container{
+    font-size: 32px;
+    color: red;
+}
+.card{
+    margin-bottom: 20px;
+}
+.formDel{
+    margin-top: 10px;
+}

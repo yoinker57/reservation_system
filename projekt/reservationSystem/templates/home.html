@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="" method="POST" class="formsik">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-inline">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+          </div>
+        {% endfor %}
+        <input type="submit" value="Szukaj Sali" class="btn btn-secondary">
+    </form>
+    {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-danger" role="alert">
+              {{ message }}
+          </div>
+      {% endfor %}
+    {% endif %}
+    {% if room_list|length == 1 %}
+      <div class="alert alert-success" role="alert">
+          Znaleziono jedną sale spełniającą podane kryteria
+      </div>
+    {% endif %}
+    {% if room_list|length > 1 %}
+      <div class="alert alert-success" role="alert">
+          Znaleziono  sale spełniające podane kryteria
+      </div>
+    {% endif %}
+    <br>
+    {% for room in room_list %}
+    <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{room.name}}</h5>
+          <p class="card-text">{{room.description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Max ilość osób: {{room.equipment__capacity}}</li>
+          <li class="list-group-item">Projektor: {% if room.equipment__projector %}Dostępne{% else %}Brak{% endif %}</li>
+          <li class="list-group-item">Wifi: {% if room.equipment__WiFi %}Dostępne{% else %}Niedostępne{% endif %}</li>
+          <li class="list-group-item">Komputery: {% if room.equipment__computers %}Dostępne{% else %}Niedostępne{% endif %}</li>
+        </ul>
+        <div class="card-body">
+          <a href="{% url 'room' room.id %}" class="card-link">Card link</a>
+        </div>
+      </div>
+    {% endfor %}
+    {% if room_list|length == 0 %}
+    <div class="alert alert-danger" role="alert">
+        Brak sali spełniającej podane kryteria
+    </div>
+    {% endif %}
+{% endblock %}
+
+
+
+
+
+
